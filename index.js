@@ -1,16 +1,19 @@
-function reverseBetween(head, m, n) {
-  if (!head || m === n) return head;
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let prev = dummy;
-  for (let i = 0; i < m - 1; i++) prev = prev.next;
-  let start = prev.next;
-  let then = start.next;
-  for (let i = 0; i < n - m; i++) {
-    start.next = then.next;
-    then.next = prev.next;
-    prev.next = then;
-    then = start.next;
+function rotateRight(head, k) {
+  if (!head) return null;
+  let length = 1;
+  let tail = head;
+  while (tail.next) {
+    length++;
+    tail = tail.next;
   }
-  return dummy.next;
+  k %= length;
+  if (k === 0) return head;
+  let newTail = head;
+  for (let i = 0; i < length - k - 1; i++) {
+    newTail = newTail.next;
+  }
+  const newHead = newTail.next;
+  newTail.next = null;
+  tail.next = head;
+  return newHead;
 }
