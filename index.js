@@ -1,15 +1,15 @@
-function removeNthFromEnd(head, n) {
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let first = dummy;
-  let second = dummy;
-  for (let i = 1; i <= n + 1; i++) {
-    first = first.next;
+const binarySearch = (arr, target) => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) {
+      return mid;
+    } else if (arr[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
   }
-  while (first !== null) {
-    first = first.next;
-    second = second.next;
-  }
-  second.next = second.next.next;
-  return dummy.next;
-}
+  return -1;
+};
