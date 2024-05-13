@@ -1,10 +1,10 @@
-function coinChange(coins, amount) {
-  const dp = new Array(amount + 1).fill(Infinity);
-  dp[0] = 0;
-  for (const coin of coins) {
-    for (let i = coin; i <= amount; i++) {
-      dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-    }
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
-  return dp[amount] === Infinity ? -1 : dp[amount];
+  return false;
 }
