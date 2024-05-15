@@ -1,13 +1,11 @@
-function buildTree(preorder, inorder) {
-  if (preorder.length === 0 || inorder.length === 0) return null;
-  const rootVal = preorder[0];
-  const root = new TreeNode(rootVal);
-  const index = inorder.indexOf(rootVal);
-  const leftInorder = inorder.slice(0, index);
-  const rightInorder = inorder.slice(index + 1);
-  const leftPreorder = preorder.slice(1, 1 + leftInorder.length);
-  const rightPreorder = preorder.slice(1 + leftInorder.length);
-  root.left = buildTree(leftPreorder, leftInorder);
-  root.right = buildTree(rightPreorder, rightInorder);
-  return root;
+function isValidBST(root) {
+  return isValid(root, null, null);
+  function isValid(node, min, max) {
+    if (!node) return true;
+    if ((min !== null && node.val <= min) || (max !== null && node.val >= max))
+      return false;
+    return (
+      isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
+    );
+  }
 }
